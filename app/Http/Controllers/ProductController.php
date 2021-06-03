@@ -19,7 +19,7 @@ class ProductController extends Controller {
 
 
     function __construct() {
-        $this->all = Product::orderBy( 'id', 'asc' )->get();
+        $this->all = Product::orderBy( 'id', 'desc' )->get();
     }
 
     /**

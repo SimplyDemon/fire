@@ -18,6 +18,9 @@
                             <li class="list-group-item">{!! session('message') !!}</li>
                         @endif
                     </div>
+                    <a href="{{route('products.create')}}">
+                        <button>Добавить продукт</button>
+                    </a>
                     <div class="card-body">
                         <table class="table">
                             <thead>
@@ -34,8 +37,7 @@
 
                             @foreach($all as $single)
                                 <tr>
-                                    <td><a href="{{route('products.show', $single->id)}}">{{$single->title}}</td>
-                                    </a>
+                                    <td><a href="{{route('products.show', $single->id)}}">{{$single->title}}</a></td>
                                     <td>{{$single->description}}</td>
                                     <td>{{$single->price}}</td>
                                     <td>Todo</td>
