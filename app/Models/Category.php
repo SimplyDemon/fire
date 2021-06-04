@@ -11,4 +11,8 @@ class Category extends Model {
     use SoftDeletes;
 
     protected $guarded = [ 'id', 'created_at', 'updated_at', 'deleted_at' ];
+
+    public function products() {
+        return $this->belongsToMany( Product::class )->withTimestamps();
+    }
 }

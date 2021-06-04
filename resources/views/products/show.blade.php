@@ -23,7 +23,11 @@
                             <p>{{$single->description}}</p>
                         @endif
                         <h6>Категории</h6>
-                        <p>Todo</p>
+                        <p>
+                            @foreach ($single->categories as $category)
+                                {{ $category->title }}{{ !$loop->last ? ', ' : '' }}
+                            @endforeach
+                        </p>
                     </div>
                 </div>
             </div>

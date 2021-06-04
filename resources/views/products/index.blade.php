@@ -40,7 +40,11 @@
                                     <td><a href="{{route('products.show', $single->id)}}">{{$single->title}}</a></td>
                                     <td>{{$single->description}}</td>
                                     <td>{{$single->price}}</td>
-                                    <td>Todo</td>
+                                    <td>
+                                        @foreach ($single->categories as $category)
+                                            <a href="{{route('categories.show', $category)}}">{{ $category->title }}{{ !$loop->last ? ', ' : '' }}</a>
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <form method="post" action="{{route('products.destroy', $single->id)}}">
                                             @csrf

@@ -12,4 +12,7 @@ class Product extends Model {
 
     protected $guarded = [ 'id', 'created_at', 'updated_at', 'deleted_at' ];
 
+    public function categories() {
+        return $this->belongsToMany( Category::class )->withTimestamps();
+    }
 }

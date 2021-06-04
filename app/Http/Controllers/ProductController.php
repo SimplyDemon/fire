@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Product\Destroy;
 use App\Http\Requests\Product\Store;
 use App\Http\Requests\Product\Update;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -16,10 +17,12 @@ class ProductController extends Controller {
     protected $folderPath = 'products.';
     const QUERY_EXCEPTION_READABLE_MESSAGE = 2;
     protected $all;
+    protected $categories;
 
 
     function __construct() {
-        $this->all = Product::orderBy( 'id', 'desc' )->get();
+        $this->all        = Product::orderBy( 'id', 'desc' )->get();
+        $this->categories = Category::orderBy( 'id', 'desc' )->get();
     }
 
     /**
@@ -39,7 +42,7 @@ class ProductController extends Controller {
     public function create() {
 
 
-        return response()->view( $this->folderPath . 'create' );
+        return response()->view( $this->folderPath . 'create', [ 'categories' => $this->categories ] );
     }
 
     /**
@@ -53,7 +56,8 @@ class ProductController extends Controller {
         $slug = Str::slug( $request->title, '-' );
         $request->merge( [ 'slug' => $slug ] );
         try {
-            $product  = Product::create( $request->all() );
+            $product = Product::create( $request->all() );
+            $product->categories()->attach( $request->categories );
             $message  = 'Добавление выполнено успешно!';
             $redirect = redirect( route( $this->folderPath . 'show', [ 'product' => $product->id ] ) );
         } catch ( QueryException $exception ) {
@@ -84,7 +88,11 @@ class ProductController extends Controller {
      * @return Response
      */
     public function edit( Product $product ) {
-        return response()->view( $this->folderPath . 'edit', [ 'single' => $product ] );
+
+        return response()->view( $this->folderPath . 'edit', [
+            'single'     => $product,
+            'categories' => $this->categories,
+        ] );
     }
 
     /**

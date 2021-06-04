@@ -40,6 +40,18 @@
                             <input class="form-control" type="number" name="price" id="price"
                                    value="{{old('price',0)}}" required>
                         </div>
+                        @if($categories)
+                            <div class=form-group">
+                                <label for="categories">Категории</label>
+                                <select name="categories[]" id="categories" class="form-select" multiple="multiple"
+                                        aria-label="multiple select example" required>
+                                    @foreach($categories as $category)
+                                        <option
+                                            value="{{$category->id}}" {{ (collect(old('categories'))->contains($category->id)) ? 'selected':'' }}>{{$category->title}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
                         <div class="form-group py-2">
                             <button type="submit" class="btn btn-primary">
                                 Добавить

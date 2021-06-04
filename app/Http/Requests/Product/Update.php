@@ -22,9 +22,11 @@ class Update extends FormRequest {
      */
     public function rules() {
         return [
-            'title'       => 'required|min:2|max:190|unique:products,title,' . $this->id,
-            'description' => 'min:2|max:1500',
-            'price'       => 'required|numeric|min:0.01',
+            'title'        => 'required|min:2|max:190|unique:products,title,' . $this->id,
+            'description'  => 'min:2|max:1500',
+            'price'        => 'required|numeric|min:0.01',
+            'categories'   => 'required|array',
+            'categories.*' => 'exists:categories,id',
         ];
     }
 }

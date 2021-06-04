@@ -43,11 +43,27 @@
                             <input class="form-control" type="number" name="price" id="price"
                                    value="{{old('price', $single->price)}}" required>
                         </div>
+
+                        <div class=form-group">
+                            <label for="categories">Категории</label>
+                            <select name="categories[]" id="categories" class="form-select" multiple="multiple"
+                                    aria-label="multiple select example" required>
+                                @foreach($categories as $category)
+                                    <option
+                                        value="{{$category->id}}"
+                                    @if(old('categories'))
+                                        {{ (collect(old('categories'))->contains($category->id)) ? 'selected' : '' }}
+                                        @else
+                                        {{ ($single->categories->contains($category->id)) ? 'selected' : '' }}
+                                        @endif
+                                    >{{$category->title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group py-2">
                             <input class="btn btn-primary" type="submit" name="method" value="Применить">
                             <input class="btn btn-primary" type="submit" name="method" value="Сохранить">
                             <button class="btn btn-primary" onclick="history.back(); return false;">Назад</button>
-
                         </div>
                     </form>
                 </div>
