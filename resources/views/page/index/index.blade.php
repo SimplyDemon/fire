@@ -33,7 +33,7 @@
 
                             @foreach($products as $single)
                                 <tr>
-                                    <td><a href="{{route('categories.show', $single->id)}}">{{$single->title}}</a></td>
+                                    <td><a href="{{route('products.show', $single->id)}}">{{$single->title}}</a></td>
                                     @foreach($categories as $category)
                                         <td class="text-center">
                                             @if($single->categories->contains($category->id))
