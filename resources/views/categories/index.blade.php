@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <h1 class="card-header">Товары</h1>
+                    <h1 class="card-header">Категории</h1>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -26,6 +26,9 @@
                             <thead>
                             <tr>
                                 <th>Название</th>
+                                <th>Количество товаров</th>
+                                <th>Цена мин</th>
+                                <th>Цена макс</th>
                                 <th>Удалить</th>
                                 <th>Редактировать</th>
                             </tr>
@@ -35,6 +38,9 @@
                             @foreach($all as $single)
                                 <tr>
                                     <td><a href="{{route('categories.show', $single->id)}}">{{$single->title}}</a></td>
+                                    <td>{{$single->products->count()}}</td>
+                                    <td>{{$single->products->min('price')}}</td>
+                                    <td>{{$single->products->max('price')}}</td>
                                     <td>
                                         <form method="post" action="{{route('categories.destroy', $single->id)}}">
                                             @csrf

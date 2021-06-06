@@ -56,7 +56,7 @@ class ProductController extends Controller {
         $slug = Str::slug( $request->title, '-' );
         $request->merge( [ 'slug' => $slug ] );
         try {
-            $product = Product::create( $request->all() );
+            $product = Product::create( $request->except( 'categories' ) );
             $product->categories()->attach( $request->categories );
             $message  = 'Добавление выполнено успешно!';
             $redirect = redirect( route( $this->folderPath . 'show', [ 'product' => $product->id ] ) );
