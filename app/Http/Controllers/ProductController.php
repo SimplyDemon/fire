@@ -108,7 +108,8 @@ class ProductController extends Controller {
         $method   = $request->input( 'method' );
         $redirect = redirect( route( $this->folderPath . 'index' ) );
         try {
-            $single->update( $request->except( 'method' ) );
+            $single->update( $request->except( [ 'method', 'categories' ] ) );
+            $single->categories()->sync( $request->categories );
             $message = 'Обновление выполнено успешно!';
         } catch ( QueryException $exception ) {
             $message  = $exception->errorInfo[ self::QUERY_EXCEPTION_READABLE_MESSAGE ];
