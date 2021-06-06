@@ -125,7 +125,7 @@ class CategoryController extends Controller {
      */
     public function destroy( Destroy $request ) {
         $single = Category::findOrFail( $request->id );
-        if ( ! empty( ! $single->products->isEmpty() ) ) {
+        if ( ! $single->products->isEmpty() ) {
             $message = 'Нельзя удалить категорию, в которой есть товары.';
         } else {
             try {
