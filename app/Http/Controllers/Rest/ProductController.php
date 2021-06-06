@@ -68,7 +68,7 @@ class ProductController extends Controller {
      *
      * @param int $id
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function show( Product $product ) {
         $product->categories;
@@ -86,7 +86,7 @@ class ProductController extends Controller {
      * @param Update $request
      * @param int $id
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function update( Update $request, $id ) {
         $product = Product::findOrFail( $id );
@@ -115,7 +115,7 @@ class ProductController extends Controller {
      *
      * @param Destroy $request
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function destroy( Destroy $request ) {
         $product  = Product::findOrFail( $request->id );
