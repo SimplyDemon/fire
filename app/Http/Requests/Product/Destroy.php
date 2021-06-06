@@ -21,7 +21,7 @@ class Destroy extends FormRequest {
      */
     public function rules() {
         return [
-            'id' => 'required|integer',
+            'id' => 'required|integer|exists:products,id',
         ];
     }
 }
