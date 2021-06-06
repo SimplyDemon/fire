@@ -26,7 +26,7 @@ class Update extends FormRequest {
             'description'  => 'min:2|max:1500',
             'price'        => 'required|numeric|min:0.01',
             'categories'   => 'required|array',
-            'categories.*' => 'exists:categories,id',
+            'categories.*' => 'integer|exists:categories,id',
         ];
     }
 }

@@ -107,6 +107,8 @@ class ProductController extends Controller {
         $single   = Product::findOrFail( $id );
         $method   = $request->input( 'method' );
         $redirect = redirect( route( $this->folderPath . 'index' ) );
+        $slug     = Str::slug( $request->title, '-' );
+        $request->merge( [ 'slug' => $slug ] );
         try {
             $single->update( $request->except( [ 'method', 'categories' ] ) );
             $single->categories()->sync( $request->categories );

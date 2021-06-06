@@ -90,6 +90,8 @@ class ProductController extends Controller {
      */
     public function update( Update $request, $id ) {
         $product = Product::findOrFail( $id );
+        $slug    = Str::slug( $request->title, '-' );
+        $request->merge( [ 'slug' => $slug ] );
         try {
             $product->update( $request->except( [ 'categories' ] ) );
             $product->categories()->sync( $request->categories );

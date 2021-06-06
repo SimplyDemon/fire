@@ -21,6 +21,7 @@ class Update extends FormRequest {
      */
     public function rules() {
         return [
+            'id'    => 'required|integer|exists:categories,id',
             'title' => 'required|min:2|max:190|unique:categories,title,' . $this->id,
         ];
     }

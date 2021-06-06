@@ -98,6 +98,8 @@ class CategoryController extends Controller {
         $single   = Category::findOrFail( $id );
         $method   = $request->input( 'method' );
         $redirect = redirect( route( $this->folderPath . 'index' ) );
+        $slug     = Str::slug( $request->title, '-' );
+        $request->merge( [ 'slug' => $slug ] );
         try {
             $single->update( $request->except( 'method' ) );
             $message = 'Обновление выполнено успешно!';
