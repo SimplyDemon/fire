@@ -125,11 +125,15 @@ class CategoryController extends Controller {
      */
     public function destroy( Destroy $request ) {
         $single = Category::findOrFail( $request->id );
-        try {
-            $single->delete();
-            $message = 'Удаление выполнено успешно!';
-        } catch ( QueryException $exception ) {
-            $message = $exception->errorInfo[ self::QUERY_EXCEPTION_READABLE_MESSAGE ];
+        if ( ! empty( ! $single->products->isEmpty() ) ) {
+            $message = 'Нельзя удалить категорию, в которой есть товары.';
+        } else {
+            try {
+                $single->delete();
+                $message = 'Удаление выполнено успешно!';
+            } catch ( QueryException $exception ) {
+                $message = $exception->errorInfo[ self::QUERY_EXCEPTION_READABLE_MESSAGE ];
+            }
         }
 
         $request->session()->flash( 'message', $message );
