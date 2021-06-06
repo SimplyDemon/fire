@@ -17,9 +17,13 @@ class ProductController extends Controller {
     const QUERY_EXCEPTION_READABLE_MESSAGE = 2;
 
     /**
+     * @return JsonResponse
+     * @api {get} /api/v1/products
+     * @apiName Index
+     * @apiGroup Products
+     *
      * Display a listing of the resource.
      *
-     * @return JsonResponse
      */
     public function index() {
         $success  = true;
@@ -34,6 +38,15 @@ class ProductController extends Controller {
     }
 
     /**
+     * @api {post} /api/v1/products
+     * @apiName Store
+     * @apiGroup Products
+     *
+     * @apiParam {string} [title] Product name
+     * @apiParam {string} [description] optional product description
+     * @apiParam {float} [price] Product price
+     * @apiParam {array} [categories] Array of ids of product categories
+     *
      * Store a newly created resource in storage.
      *
      * @param Store $request
@@ -64,9 +77,15 @@ class ProductController extends Controller {
     }
 
     /**
+     * @api {get} /api/v1/products/{product_id}
+     * @apiName Show
+     * @apiGroup Products
+     *
+     * @apiParam {integer} [product_id] Product id
+     *
      * Display the specified resource.
      *
-     * @param int $id
+     * @param Product $product
      *
      * @return JsonResponse
      */
@@ -81,6 +100,17 @@ class ProductController extends Controller {
     }
 
     /**
+     * @api {put} /api/v1/products/{product_id}
+     * @apiName Update
+     * @apiGroup Products
+     *
+     * @apiParam {string} [title] Product name
+     * @apiParam {string} [description] optional product description
+     * @apiParam {float} [price] Product price
+     * @apiParam {array} [categories] Array of ids of product categories
+     * @apiParam {integer} [id] Product id
+     * @apiParam {integer} [product_id] Product id
+     *
      * Update the specified resource in storage.
      *
      * @param Update $request
@@ -113,6 +143,13 @@ class ProductController extends Controller {
     }
 
     /**
+     * @api {delete} /api/v1/products/{product_id}
+     * @apiName Destroy
+     * @apiGroup Products
+     *
+     * @apiParam {integer} [product_id] Product id
+     * @apiParam {integer} [id] Product id
+     *
      * Remove the specified resource from storage.
      *
      * @param Destroy $request

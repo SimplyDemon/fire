@@ -16,9 +16,13 @@ class CategoryController extends Controller {
     const QUERY_EXCEPTION_READABLE_MESSAGE = 2;
 
     /**
+     * @return JsonResponse
+     * @api {get} /api/v1/categories
+     * @apiName Index
+     * @apiGroup Categories
+     *
      * Display a listing of the resource.
      *
-     * @return JsonResponse
      */
     public function index() {
         $success    = true;
@@ -36,6 +40,12 @@ class CategoryController extends Controller {
     }
 
     /**
+     * @api {post} /api/v1/categories
+     * @apiName Store
+     * @apiGroup Categories
+     *
+     * @apiParam {string} [title] Category name
+     *
      * Store a newly created resource in storage.
      *
      * @param Store $request
@@ -64,6 +74,12 @@ class CategoryController extends Controller {
     }
 
     /**
+     * @api {get} /api/v1/categories/{category_id}
+     * @apiName Show
+     * @apiGroup Categories
+     *
+     * @apiParam {int} [category_id] Category Id
+     *
      * Display the specified resource.
      *
      * @param Category $category
@@ -82,6 +98,14 @@ class CategoryController extends Controller {
     }
 
     /**
+     * @api {put} /api/v1/categories/{category_id}
+     * @apiName Update
+     * @apiGroup Categories
+     *
+     * @apiParam {int} [category_id] Category Id
+     * @apiParam {int} [id] Category Id
+     * @apiParam {string} [title] Category name
+     *
      * Update the specified resource in storage.
      *
      * @param Update $request
@@ -113,6 +137,14 @@ class CategoryController extends Controller {
     }
 
     /**
+     * @api {delete} /api/v1/categories/{category_id}
+     * @apiName Destroy
+     * @apiGroup Categories
+     *
+     * @apiParam {int} [category_id] Category Id
+     * @apiParam {int} [id] Category Id
+     *
+     *
      * Remove the specified resource from storage.
      *
      * @param Destroy $request
