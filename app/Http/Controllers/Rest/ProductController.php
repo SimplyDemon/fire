@@ -17,13 +17,13 @@ class ProductController extends Controller {
     const QUERY_EXCEPTION_READABLE_MESSAGE = 2;
 
     /**
-     * @return JsonResponse
      * @api {get} /api/v1/products
      * @apiName Index
      * @apiGroup Products
      *
      * Display a listing of the resource.
      *
+     * @return JsonResponse
      */
     public function index() {
         $success  = true;
